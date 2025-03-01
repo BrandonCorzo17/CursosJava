@@ -43,12 +43,16 @@ public class Persona {
 
 
 
+
+
+
+
 public class Conductor extends Persona {
     private String nroLicencia;
     private int experiencia;
 
-    public Conductor(String dni, String nombres, int edad, String nroLicencia, int experiencia) {
-        super(dni, nombres, edad);
+    public Conductor(Persona persona, String nroLicencia, int experiencia) {
+        super(persona.getDni(), persona.getNombres(), persona.getEdad());
         this.nroLicencia = nroLicencia;
         this.experiencia = experiencia;
     }
@@ -87,8 +91,8 @@ public class Pasajero extends Persona {
     private String codPasajero;
     private String telefono;
 
-    public Pasajero(String dni, String nombres, int edad, String codPasajero, String telefono) {
-        super(dni, nombres, edad);
+    public Pasajero(Persona persona, String codPasajero, String telefono) {
+        super(persona.getDni(), persona.getNombres(), persona.getEdad());
         this.codPasajero = codPasajero;
         this.telefono = telefono;
     }
@@ -121,10 +125,6 @@ public class Pasajero extends Persona {
 
 
 
-
-
-
-
 public class Viaje {
     private String codViaje;
     private String origen;
@@ -144,62 +144,6 @@ public class Viaje {
         this.fechaHora = fechaHora;
     }
 
-    public String getCodViaje() {
-        return codViaje;
-    }
-
-    public void setCodViaje(String codViaje) {
-        this.codViaje = codViaje;
-    }
-
-    public String getOrigen() {
-        return origen;
-    }
-
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
-
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    public Pasajero getPasajero() {
-        return pasajero;
-    }
-
-    public void setPasajero(Pasajero pasajero) {
-        this.pasajero = pasajero;
-    }
-
-    public Conductor getConductor() {
-        return conductor;
-    }
-
-    public void setConductor(Conductor conductor) {
-        this.conductor = conductor;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
-
-    public String getFechaHora() {
-        return fechaHora;
-    }
-
-    public void setFechaHora(String fechaHora) {
-        this.fechaHora = fechaHora;
-    }
-
     @Override
     public String toString() {
         return "Viaje{codViaje='" + codViaje + "', origen='" + origen + "', destino='" + destino + "', pasajero=" + pasajero + ", conductor=" + conductor + ", costo=" + costo + ", fechaHora='" + fechaHora + "'}";
@@ -213,12 +157,6 @@ public class Viaje {
 
 
 
-
------------
-
-
-
-
 import java.util.ArrayList;
 
 public class Test1 {
@@ -227,23 +165,21 @@ public class Test1 {
         ArrayList<Pasajero> pasajeros = new ArrayList<>();
         ArrayList<Viaje> viajes = new ArrayList<>();
 
-        // Crear conductores
-        Conductor conductor1 = new Conductor("12345678", "Juan Pérez", 35, "L123456", 10);
-        Conductor conductor2 = new Conductor("87654321", "Luis Gómez", 40, "L654321", 15);
+        // Crear objetos Persona
+        Persona personaConductor = new Persona("12345678", "Juan Pérez", 35);
+        Persona personaPasajero = new Persona("11223344", "María López", 28);
+
+        // Crear conductor usando un objeto Persona
+        Conductor conductor1 = new Conductor(personaConductor, "L123456", 10);
         conductores.add(conductor1);
-        conductores.add(conductor2);
 
-        // Crear pasajeros
-        Pasajero pasajero1 = new Pasajero("11223344", "María López", 28, "P001", "987654321");
-        Pasajero pasajero2 = new Pasajero("55667788", "Carlos Mendoza", 30, "P002", "912345678");
+        // Crear pasajero usando un objeto Persona
+        Pasajero pasajero1 = new Pasajero(personaPasajero, "P001", "987654321");
         pasajeros.add(pasajero1);
-        pasajeros.add(pasajero2);
 
-        // Crear viajes
+        // Crear un viaje
         Viaje viaje1 = new Viaje("V001", "Lima", "Arequipa", pasajero1, conductor1, 150.50, "2025-03-01 10:00");
-        Viaje viaje2 = new Viaje("V002", "Cusco", "Puno", pasajero2, conductor2, 200.75, "2025-03-02 08:30");
         viajes.add(viaje1);
-        viajes.add(viaje2);
 
         // Mostrar conductores
         System.out.println("Conductores:");
@@ -264,5 +200,4 @@ public class Test1 {
         }
     }
 }
-
 
