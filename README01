@@ -1,1 +1,268 @@
+public class Persona {
+    private String dni;
+    private String nombres;
+    private int edad;
+
+    public Persona(String dni, String nombres, int edad) {
+        this.dni = dni;
+        this.nombres = nombres;
+        this.edad = edad;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{dni='" + dni + "', nombres='" + nombres + "', edad=" + edad + "}";
+    }
+}
+
+
+
+
+
+public class Conductor extends Persona {
+    private String nroLicencia;
+    private int experiencia;
+
+    public Conductor(String dni, String nombres, int edad, String nroLicencia, int experiencia) {
+        super(dni, nombres, edad);
+        this.nroLicencia = nroLicencia;
+        this.experiencia = experiencia;
+    }
+
+    public String getNroLicencia() {
+        return nroLicencia;
+    }
+
+    public void setNroLicencia(String nroLicencia) {
+        this.nroLicencia = nroLicencia;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+
+    @Override
+    public String toString() {
+        return "Conductor{" + super.toString() + ", nroLicencia='" + nroLicencia + "', experiencia=" + experiencia + "}";
+    }
+}
+
+
+
+
+
+
+
+
+
+public class Pasajero extends Persona {
+    private String codPasajero;
+    private String telefono;
+
+    public Pasajero(String dni, String nombres, int edad, String codPasajero, String telefono) {
+        super(dni, nombres, edad);
+        this.codPasajero = codPasajero;
+        this.telefono = telefono;
+    }
+
+    public String getCodPasajero() {
+        return codPasajero;
+    }
+
+    public void setCodPasajero(String codPasajero) {
+        this.codPasajero = codPasajero;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        return "Pasajero{" + super.toString() + ", codPasajero='" + codPasajero + "', telefono='" + telefono + "'}";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+public class Viaje {
+    private String codViaje;
+    private String origen;
+    private String destino;
+    private Pasajero pasajero;
+    private Conductor conductor;
+    private double costo;
+    private String fechaHora;
+
+    public Viaje(String codViaje, String origen, String destino, Pasajero pasajero, Conductor conductor, double costo, String fechaHora) {
+        this.codViaje = codViaje;
+        this.origen = origen;
+        this.destino = destino;
+        this.pasajero = pasajero;
+        this.conductor = conductor;
+        this.costo = costo;
+        this.fechaHora = fechaHora;
+    }
+
+    public String getCodViaje() {
+        return codViaje;
+    }
+
+    public void setCodViaje(String codViaje) {
+        this.codViaje = codViaje;
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public Pasajero getPasajero() {
+        return pasajero;
+    }
+
+    public void setPasajero(Pasajero pasajero) {
+        this.pasajero = pasajero;
+    }
+
+    public Conductor getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Conductor conductor) {
+        this.conductor = conductor;
+    }
+
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
+    public String getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = fechaHora;
+    }
+
+    @Override
+    public String toString() {
+        return "Viaje{codViaje='" + codViaje + "', origen='" + origen + "', destino='" + destino + "', pasajero=" + pasajero + ", conductor=" + conductor + ", costo=" + costo + ", fechaHora='" + fechaHora + "'}";
+    }
+}
+
+
+
+
+
+
+
+
+
+-----------
+
+
+
+
+import java.util.ArrayList;
+
+public class Test1 {
+    public static void main(String[] args) {
+        ArrayList<Conductor> conductores = new ArrayList<>();
+        ArrayList<Pasajero> pasajeros = new ArrayList<>();
+        ArrayList<Viaje> viajes = new ArrayList<>();
+
+        // Crear conductores
+        Conductor conductor1 = new Conductor("12345678", "Juan Pérez", 35, "L123456", 10);
+        Conductor conductor2 = new Conductor("87654321", "Luis Gómez", 40, "L654321", 15);
+        conductores.add(conductor1);
+        conductores.add(conductor2);
+
+        // Crear pasajeros
+        Pasajero pasajero1 = new Pasajero("11223344", "María López", 28, "P001", "987654321");
+        Pasajero pasajero2 = new Pasajero("55667788", "Carlos Mendoza", 30, "P002", "912345678");
+        pasajeros.add(pasajero1);
+        pasajeros.add(pasajero2);
+
+        // Crear viajes
+        Viaje viaje1 = new Viaje("V001", "Lima", "Arequipa", pasajero1, conductor1, 150.50, "2025-03-01 10:00");
+        Viaje viaje2 = new Viaje("V002", "Cusco", "Puno", pasajero2, conductor2, 200.75, "2025-03-02 08:30");
+        viajes.add(viaje1);
+        viajes.add(viaje2);
+
+        // Mostrar conductores
+        System.out.println("Conductores:");
+        for (Conductor c : conductores) {
+            System.out.println(c);
+        }
+
+        // Mostrar pasajeros
+        System.out.println("\nPasajeros:");
+        for (Pasajero p : pasajeros) {
+            System.out.println(p);
+        }
+
+        // Mostrar viajes
+        System.out.println("\nViajes:");
+        for (Viaje v : viajes) {
+            System.out.println(v);
+        }
+    }
+}
+
 
